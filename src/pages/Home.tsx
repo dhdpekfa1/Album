@@ -1,5 +1,5 @@
 import { Header, Nav } from "@/components/common";
-import { CardItem } from "@/components/home";
+import { ImageCard } from "@/components/home";
 import { SearchBar } from "@/components/ui";
 
 const HomePage = () => {
@@ -35,6 +35,14 @@ const HomePage = () => {
         </div>
 
         {/* 메인 */}
+        <div className="page__container__contents">
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+          <ImageCard />
+        </div>
       </div>
     </div>
   );

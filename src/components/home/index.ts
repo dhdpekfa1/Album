@@ -1,1 +1,1 @@
-export { CardItem } from "@/components/home/CardItem";
+export { ImageCard } from "@/components/home/image-card/ImageCard";
