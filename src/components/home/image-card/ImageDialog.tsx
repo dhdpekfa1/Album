@@ -18,6 +18,7 @@ import {
   AvatarImage,
   AvatarFallback,
 } from "@/components/ui";
+import { IconWithText } from "@/components/atoms";
 
 const ImageDialog = () => {
   return (
@@ -51,21 +52,18 @@ const ImageDialog = () => {
               <small className="text-sm font-medium leading-none">ChaCha</small>
             </div>
           </div>
-          {/* TODO: Atoms 분리 */}
           <div className="w-full flex flex-col gap-2">
-            <div className="flex items-center">
-              <Pin className="w-4 h-4 mt-[2px] mr-4" />
-              <span className="text-sm"> 등대-근처-한인-주택-JrUPDate</span>
-            </div>
-            <div className="flex items-center">
-              <ClipboardPenLine className="w-4 h-4 mt-[2px] mr-4" />
-              <span className="text-sm"> 등대-근처-한인-주택-JrUPDate</span>
-            </div>
-            <div className="flex items-center">
-              <AlignLeft className="w-4 h-4 mt-[2px] mr-4" />
-              <span className="text-sm"> 등대-근처-한인-주택-JrUPDate</span>
-            </div>
+            <IconWithText Icon={Pin} text="등대-근처-한인-주택-JrUPDate" />
+            <IconWithText
+              Icon={ClipboardPenLine}
+              text="등대-근처-한인-주택-JrUPDate"
+            />
+            <IconWithText
+              Icon={AlignLeft}
+              text="등대-근처-한인-주택-JrUPDate"
+            />
           </div>
+
           <div className="w-full flex items-center justify-end gap-4">
             <div className="flex items-center gap-1 text-sm">
               <p className="leading-7">게시일:</p>
