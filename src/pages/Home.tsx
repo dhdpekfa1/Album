@@ -1,4 +1,4 @@
-import { Header, Nav } from "@/components/common";
+import { Header, Nav, PaginationFooter } from "@/components/common";
 import { ImageCard } from "@/components/home";
 import { SearchBar } from "@/components/ui";
 
@@ -44,6 +44,7 @@ const HomePage = () => {
           <ImageCard />
         </div>
       </div>
+      <PaginationFooter />
     </div>
   );
 };
