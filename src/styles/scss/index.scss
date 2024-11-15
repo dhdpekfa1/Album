@@ -1,3 +1,5 @@
+@use "./colors";
+
 * {
   margin: 0;
   padding: 0;
@@ -7,4 +9,7 @@
 .page {
   width: 100vw;
   height: 100vh;
+
+  font-family: "Noto Sans", sans-serif;
+  font-style: normal;
 }
