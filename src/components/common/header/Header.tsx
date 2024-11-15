@@ -16,13 +16,12 @@ const Header = () => {
             width={36}
             height={36}
           />
-          {/* <h2>Search Image</h2> */}
         </Link>
       </div>
 
       <div className={styles[`header__user-wrapper`]}>
         {/* 북마크 버튼 */}
-        <Button variant={"outline"}>
+        <Button variant={"secondary"}>
           <BookMarked />
           북마크
         </Button>

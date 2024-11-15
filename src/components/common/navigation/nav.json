@@ -1,0 +1,86 @@
+[
+  {
+    "id": 0,
+    "path": "/search/edit",
+    "label": "보도/편집 전용",
+    "searchValue": "edit",
+    "isActive": false
+  },
+  {
+    "id": 1,
+    "path": "/search/following",
+    "label": "팔로잉",
+    "searchValue": "following",
+    "isActive": false
+  },
+  {
+    "id": 2,
+    "path": "/search/photo-plus",
+    "label": "Unsplash Photo+",
+    "searchValue": "photo",
+    "isActive": false
+  },
+  {
+    "id": 3,
+    "path": "/search/one-color",
+    "label": "단색",
+    "searchValue": "one color",
+    "isActive": false
+  },
+  {
+    "id": 4,
+    "path": "/search/3d-render",
+    "label": "3D 렌더링",
+    "searchValue": "3d rendering",
+    "isActive": false
+  },
+  {
+    "id": 5,
+    "path": "/search/nature",
+    "label": "자연",
+    "searchValue": "nature",
+    "isActive": false
+  },
+  {
+    "id": 6,
+    "path": "/search/texture",
+    "label": "텍스쳐 및 패턴",
+    "searchValue": "texture",
+    "isActive": false
+  },
+  {
+    "id": 7,
+    "path": "/search/interior",
+    "label": "인테리어",
+    "searchValue": "interior",
+    "isActive": false
+  },
+  {
+    "id": 8,
+    "path": "/search/film",
+    "label": "필름",
+    "searchValue": "film",
+    "isActive": false
+  },
+  {
+    "id": 9,
+    "path": "/search/experimental",
+    "label": "실험적인",
+    "searchValue": "experimental",
+    "isActive": false
+  },
+  {
+    "id": 10,
+    "path": "/search/travel",
+    "label": "여행",
+    "searchValue": "travel",
+    "isActive": false
+  },
+  {
+    "id": 11,
+    "path": "/search/sports",
+    "label": "스포츠",
+    "searchValue": "sports",
+    "isActive": false
+  }
+]
