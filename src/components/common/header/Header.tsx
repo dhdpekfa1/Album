@@ -1,5 +1,47 @@
+import styles from "./header.module.scss";
+import { Link } from "react-router-dom";
+import { BookMarked } from "lucide-react";
+import { Avatar, AvatarImage, Button, Separator } from "@/components/ui";
+import { AvatarFallback } from "@radix-ui/react-avatar";
+
 const Header = () => {
-  return <div>Header</div>;
+  return (
+    <header className={styles.header}>
+      {/* logo */}
+      <div className={styles[`header__logo-wrapper`]}>
+        <Link to={"/bookmark"} className={styles[`header__logo-wrapper__logo`]}>
+          <img
+            src="src/assets/logo.svg"
+            alt="logo-image"
+            width={36}
+            height={36}
+          />
+          {/* <h2>Search Image</h2> */}
+        </Link>
+      </div>
+
+      <div className={styles[`header__user-wrapper`]}>
+        {/* 북마크 버튼 */}
+        <Button variant={"outline"}>
+          <BookMarked />
+          북마크
+        </Button>
+        <Separator orientation="vertical" className="h-10" />
+        <Avatar>
+          <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <div className="flex items-center gap-1">
+          {/* 유저 정보 */}
+          <small className="text-sm font-medium leading-none">coramdeo</small>
+          &middot;
+          <small className="text-sm font-medium leading-none">
+            dhdpekfa1@daum.net
+          </small>
+        </div>
+      </div>
+    </header>
+  );
 };
 
 export { Header };
