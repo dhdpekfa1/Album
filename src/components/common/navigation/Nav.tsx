@@ -18,9 +18,7 @@ const Nav = () => {
     <nav className={styles.nav}>
       {navMene.map((nav: Nav) => (
         <Link to={nav.path} key={nav.id}>
-          <small className="text-sm font-normal leading-none">
-            {nav.label}
-          </small>
+          <small className="text-sm font-normal leading-10">{nav.label}</small>
         </Link>
       ))}
     </nav>
