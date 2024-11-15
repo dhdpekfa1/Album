@@ -54,14 +54,8 @@ const ImageDialog = () => {
           </div>
           <div className="w-full flex flex-col gap-2">
             <IconWithText Icon={Pin} text="등대-근처-한인-주택-JrUPDate" />
-            <IconWithText
-              Icon={ClipboardPenLine}
-              text="등대-근처-한인-주택-JrUPDate"
-            />
-            <IconWithText
-              Icon={AlignLeft}
-              text="등대-근처-한인-주택-JrUPDate"
-            />
+            <IconWithText Icon={ClipboardPenLine} text="요건 어떤지.." />
+            <IconWithText Icon={AlignLeft} text="메모메모메모메뉴메모..." />
           </div>
 
           <div className="w-full flex items-center justify-end gap-4">

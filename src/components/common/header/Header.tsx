@@ -9,7 +9,7 @@ const Header = () => {
     <header className={styles.header}>
       {/* logo */}
       <div className={styles[`header__logo-wrapper`]}>
-        <Link to={"/bookmark"} className={styles[`header__logo-wrapper__logo`]}>
+        <Link to={"/"} className={styles[`header__logo-wrapper__logo`]}>
           <img
             src="src/assets/logo.svg"
             alt="logo-image"
@@ -21,10 +21,12 @@ const Header = () => {
 
       <div className={styles[`header__user-wrapper`]}>
         {/* 북마크 버튼 */}
-        <Button variant={"secondary"}>
-          <BookMarked />
-          북마크
-        </Button>
+        <Link to={"/bookmark"}>
+          <Button variant={"secondary"}>
+            <BookMarked />
+            북마크
+          </Button>
+        </Link>
         <Separator orientation="vertical" className="h-10" />
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
