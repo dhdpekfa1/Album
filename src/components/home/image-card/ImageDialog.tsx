@@ -22,7 +22,7 @@ import { IconWithText } from "@/components/atoms";
 import { ImageCardProps } from "@/types/home";
 import { toast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
-import { getBookmarks, setBookmarks } from "@/util/helper";
+import { getBookmarks, setBookmarks } from "@/utils/helper";
 
 const ImageDialog = ({ data, mode }: ImageCardProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -68,7 +68,7 @@ const ImageDialog = ({ data, mode }: ImageCardProps) => {
     setIsBookmarked(false);
     toast({
       title: "삭제 성공",
-      description: "북마크에서 제거했습니다.",
+      description: "북마크에서 삭제했습니다.",
     });
   };
 
