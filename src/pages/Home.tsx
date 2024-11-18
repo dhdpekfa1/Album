@@ -1,35 +1,24 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState, useCallback } from "react";
 import { ImageCardType } from "@/types/home";
 import { Header, Nav, PaginationFooter } from "@/components/common";
 import { ImageCard } from "@/components/home";
 import { SearchBar } from "@/components/ui";
 import { useToast } from "@/hooks/use-toast";
+import { getDataApi, pageAtom, searchValueAtom } from "@/store";
+import { useAtom } from "jotai";
 
 const HomePage = () => {
-  const [images, setImages] = useState([]);
   const { toast } = useToast();
+  const [page] = useAtom(pageAtom);
+  const [searchValue] = useAtom(searchValueAtom);
+  const [images, setImages] = useState([]);
 
-  useEffect(() => {
-    fetchApiData();
-  }, []);
-
-  const fetchApiData = async () => {
-    const apiKey = import.meta.env.VITE_API_KEY;
-    const BASE_URL = "https://api.unsplash.com/search/photos";
-
-    const page = 1;
-    const searchValue = "korea";
-    const per_page = 30;
-
+  const fetchImagesData = useCallback(async () => {
     try {
-      const res = await axios.get(
-        `${BASE_URL}/?query=${searchValue}&page=${page}&per_page=${per_page}&client_id=${apiKey}`
-      );
-
-      if (res.status === 200 && res.data) {
+      const res = await getDataApi(searchValue, page);
+      if (res && res.status === 200 && res.data) {
         setImages(res.data.results);
-        console.log("dataaa", images);
+
         // TODO: 비동기처리 관련 로직 추가 여부 고민
         toast({
           title: "API 호출 성공",
@@ -45,7 +34,11 @@ const HomePage = () => {
     } catch (err) {
       console.error(err);
     }
-  };
+  }, [searchValue, page, toast]);
+
+  useEffect(() => {
+    fetchImagesData();
+  }, [fetchImagesData]);
 
   return (
     <div className="page">
