@@ -3,11 +3,11 @@ import { Heart } from "lucide-react";
 import { ImageDialog } from "@/components/home";
 import { ImageCardProps } from "@/types/home";
 
-const ImageCard = ({ data }: ImageCardProps) => {
+const ImageCard = ({ data, mode }: ImageCardProps) => {
   return (
     <div className="flex flex-col justify-between space-y-3 w-64 h-64 cursor-pointer">
       <div className="relative flex flex-col gap-3">
-        <ImageDialog data={data} />
+        <ImageDialog data={data} mode={mode} />
 
         {/* <Skeleton className="w-[250px] h-[150px] rounded-xl" /> */}
         <img

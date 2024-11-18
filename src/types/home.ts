@@ -51,4 +51,5 @@ export interface ImageCardType {
 }
 export interface ImageCardProps {
   data: ImageCardType;
+  mode: "home" | "bookmark";
 }

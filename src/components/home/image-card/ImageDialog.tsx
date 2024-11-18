@@ -1,5 +1,6 @@
 import {
   AlignLeft,
+  BookMarked,
   ClipboardPenLine,
   FolderOpen,
   Heart,
@@ -7,7 +8,6 @@ import {
 } from "lucide-react";
 import {
   Button,
-  // Skeleton,
   Dialog,
   DialogTrigger,
   DialogContent,
@@ -19,9 +19,62 @@ import {
   AvatarFallback,
 } from "@/components/ui";
 import { IconWithText } from "@/components/atoms";
-import { ImageCardProps } from "@/types/home";
+import { ImageCardProps, ImageCardType } from "@/types/home";
+import { toast } from "@/hooks/use-toast";
+import { useState, useEffect } from "react";
 
-const ImageDialog = ({ data }: ImageCardProps) => {
+const ImageDialog = ({ data, mode }: ImageCardProps) => {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  // 북마크 확인 함수
+  const checkIfBookmarked = (): boolean => {
+    const existingBookmarks: ImageCardType[] = JSON.parse(
+      localStorage.getItem("bookmarks") || "[]"
+    );
+    return existingBookmarks.some((bookmark) => bookmark.id === data.id);
+  };
+
+  // 북마크 여부 확인
+  useEffect(() => {
+    setIsBookmarked(checkIfBookmarked());
+  }, [data.id]);
+
+  const addBookmark = () => {
+    if (!isBookmarked) {
+      const existingBookmarks: ImageCardType[] = JSON.parse(
+        localStorage.getItem("bookmarks") || "[]"
+      );
+      const updatedBookmarks = [...existingBookmarks, data];
+      localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
+      setIsBookmarked(true);
+      toast({
+        title: "저장 성공",
+        description: "북마크에 추가했습니다.",
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: "저장 실패",
+        description: "이미 북마크에 추가된 항목입니다.",
+      });
+    }
+  };
+
+  const removeBookmark = () => {
+    const existingBookmarks: ImageCardType[] = JSON.parse(
+      localStorage.getItem("bookmarks") || "[]"
+    );
+    const updatedBookmarks = existingBookmarks.filter(
+      (bookmark) => bookmark.id !== data.id
+    );
+    localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
+    setIsBookmarked(false);
+    toast({
+      title: "삭제 성공",
+      description: "북마크에서 제거했습니다.",
+    });
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -40,7 +93,6 @@ const ImageDialog = ({ data }: ImageCardProps) => {
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col items-center space-x-2 gap-3">
-          {/* <Skeleton className="w-full h-80 rounded-xl" /> */}
           <img
             src={data.urls.full}
             alt="이미지"
@@ -89,6 +141,22 @@ const ImageDialog = ({ data }: ImageCardProps) => {
             </div>
           </div>
         </div>
+        {/* 북마크 추가 버튼 */}
+        {mode === "home" ? (
+          <Button
+            variant={"secondary"}
+            onClick={addBookmark}
+            disabled={isBookmarked}
+          >
+            <BookMarked />
+            {isBookmarked ? "이미 추가됨" : "북마크 추가"}
+          </Button>
+        ) : (
+          <Button variant={"destructive"} onClick={removeBookmark}>
+            <BookMarked />
+            북마크 삭제
+          </Button>
+        )}
       </DialogContent>
     </Dialog>
   );

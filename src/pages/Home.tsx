@@ -10,7 +10,7 @@ import { useAtom } from "jotai";
 const HomePage = () => {
   const { toast } = useToast();
   const [page] = useAtom(pageAtom);
-  const [searchValue] = useAtom(searchValueAtom);
+  const [searchValue, setSearchValue] = useAtom(searchValueAtom);
   const [images, setImages] = useState([]);
 
   const fetchImagesData = useCallback(async () => {
@@ -18,23 +18,24 @@ const HomePage = () => {
       const res = await getDataApi(searchValue, page);
       if (res && res.status === 200 && res.data) {
         setImages(res.data.results);
-
-        // TODO: 비동기처리 관련 로직 추가 여부 고민
-        toast({
-          title: "API 호출 성공",
-          description: "Shadcn UI - Toast UI 사용 테스트",
-        });
-      } else {
-        toast({
-          variant: "destructive",
-          title: "API 호출 실패",
-          description: "API 호풀 필수 파라미터 값 체크가 필요합니다.",
-        });
       }
     } catch (err) {
       console.error(err);
     }
   }, [searchValue, page, toast]);
+
+  // 검색창에서 엔터 키 입력 시 검색 실행
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setSearchValue("");
+      fetchImagesData(); // API 호출
+    }
+  };
+
+  // 검색창의 값 변경 핸들러
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
 
   useEffect(() => {
     fetchImagesData();
@@ -66,6 +67,9 @@ const HomePage = () => {
             </div>
             <SearchBar
               placeholder="원하는 이미지를 검색하세요."
+              value={searchValue}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
               className="mt-4"
             />
           </div>
@@ -74,7 +78,7 @@ const HomePage = () => {
         {/* 메인 */}
         <div className="page__container__contents">
           {images.map((img: ImageCardType) => {
-            return <ImageCard data={img} key={img.id} />;
+            return <ImageCard data={img} key={img.id} mode="home" />;
           })}
         </div>
       </div>

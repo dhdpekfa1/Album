@@ -10,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index path="/" element={<HomePage />} />
+          <Route index path="/search/:id" element={<HomePage />} />
           <Route path="/bookmark" element={<BookmarkPage />} />
         </Routes>
         <Toaster />
