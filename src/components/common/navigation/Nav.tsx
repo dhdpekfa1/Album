@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAtom } from "jotai";
 import navJson from "./nav.json";
@@ -14,26 +14,25 @@ export interface Nav {
 }
 
 const Nav = () => {
-  const [navMenu, setNavMenu] = useState<Nav[]>(navJson);
+  const [navMenu, setNavMenu] = useState<Nav[]>([]);
   const [, setSearchValue] = useAtom(searchValueAtom);
-  const location = useLocation(); // useLocation을 사용하여 현재 경로 가져오기
+  const location = useLocation();
 
-  useEffect(() => {
-    // 현재 경로와 비교 후 활성 상태 설정
-    const updatedMenu = navMenu.map((nav) => ({
+  const updatedMenu = useMemo(() => {
+    return navJson.map((nav) => ({
       ...nav,
       isActive:
         location.pathname === nav.path || location.pathname.includes(nav.path),
     }));
+  }, [location.pathname]);
 
-    // 활성화된 메뉴의 searchValue 설정
+  useEffect(() => {
+    setNavMenu(updatedMenu);
     const activeNav = updatedMenu.find((nav) => nav.isActive);
     if (activeNav) {
       setSearchValue(activeNav.searchValue);
     }
-
-    setNavMenu(updatedMenu);
-  }, [location.pathname, setSearchValue]);
+  }, [updatedMenu, setSearchValue]);
 
   return (
     <nav className={styles.nav}>
