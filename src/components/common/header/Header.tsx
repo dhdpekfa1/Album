@@ -1,8 +1,8 @@
-import styles from "./header.module.scss";
 import { Link } from "react-router-dom";
 import { BookMarked } from "lucide-react";
 import { Avatar, AvatarImage, Button, Separator } from "@/components/ui";
 import { AvatarFallback } from "@radix-ui/react-avatar";
+import styles from "./header.module.scss";
 
 const Header = () => {
   return (
@@ -16,6 +16,9 @@ const Header = () => {
             width={36}
             height={36}
           />
+          <h2 className="ml-2 text-lg text-cyan-950 font-bold leading-none">
+            Image Search
+          </h2>
         </Link>
       </div>
 
@@ -34,7 +37,7 @@ const Header = () => {
         </Avatar>
         <div className="flex items-center gap-1">
           {/* 유저 정보 */}
-          <small className="text-sm font-medium leading-none">coramdeo</small>
+          <small className="text-sm font-medium leading-none">ollin</small>
           &middot;
           <small className="text-sm font-medium leading-none">
             dhdpekfa1@daum.net

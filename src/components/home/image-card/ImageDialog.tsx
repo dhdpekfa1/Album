@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import {
   Button,
-  Skeleton,
+  // Skeleton,
   Dialog,
   DialogTrigger,
   DialogContent,
@@ -19,8 +19,9 @@ import {
   AvatarFallback,
 } from "@/components/ui";
 import { IconWithText } from "@/components/atoms";
+import { ImageCardProps } from "@/types/home";
 
-const ImageDialog = () => {
+const ImageDialog = ({ data }: ImageCardProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -39,36 +40,52 @@ const ImageDialog = () => {
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col items-center space-x-2 gap-3">
-          <Skeleton className="w-full h-80 rounded-xl" />
+          {/* <Skeleton className="w-full h-80 rounded-xl" /> */}
+          <img
+            src={data.urls.full}
+            alt="이미지"
+            className="w-full h-80 rounded-xl"
+          />
           <div className="w-full flex items-center justify-start">
             <div className="flex items-center gap-2">
               <Avatar>
                 <AvatarImage
-                  src="https://github.com/shadcn.png"
+                  src={data.user.profile_image.small}
                   alt="@shadcn"
                 />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <small className="text-sm font-medium leading-none">ChaCha</small>
+              <small className="text-sm font-medium leading-none">
+                {data.user.username}
+              </small>
             </div>
           </div>
           <div className="w-full flex flex-col gap-2">
-            <IconWithText Icon={Pin} text="등대-근처-한인-주택-JrUPDate" />
-            <IconWithText Icon={ClipboardPenLine} text="요건 어떤지.." />
-            <IconWithText Icon={AlignLeft} text="메모메모메모메뉴메모..." />
+            <IconWithText Icon={Pin} text={data.alternative_slugs.ko} />
+            <IconWithText Icon={ClipboardPenLine} text={data.alt_description} />
+            <IconWithText
+              Icon={AlignLeft}
+              text={
+                data.description
+                  ? data.description
+                  : "등록된 설명글이 없습니다."
+              }
+            />
           </div>
 
           <div className="w-full flex items-center justify-end gap-4">
             <div className="flex items-center gap-1 text-sm">
               <p className="leading-7">게시일:</p>
-              2024-03-14
+              {data.created_at.split("T")[0]}
             </div>
             <div className="flex items-center gap-1 text-sm">
               <Heart
                 className="h-[14px] w-[14px] mt-[2x] text-rose-600"
                 fill="#e11d48"
               />
-              1,333
+              {data.likes
+                .toString()
+                .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
             </div>
           </div>
         </div>

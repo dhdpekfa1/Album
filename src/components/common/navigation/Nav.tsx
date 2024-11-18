@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import navJson from "./nav.json";
 import styles from "./nav.module.scss";
 
-interface Nav {
+export interface Nav {
   id: number;
   path: string;
   label: string;
