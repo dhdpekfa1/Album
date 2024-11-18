@@ -152,9 +152,13 @@ const ImageDialog = ({ data, mode }: ImageCardProps) => {
             {isBookmarked ? "이미 추가됨" : "북마크 추가"}
           </Button>
         ) : (
-          <Button variant={"destructive"} onClick={removeBookmark}>
+          <Button
+            variant={"destructive"}
+            onClick={removeBookmark}
+            disabled={!isBookmarked}
+          >
             <BookMarked />
-            북마크 삭제
+            {isBookmarked ? "북마크 삭제" : "이미 삭제됨"}
           </Button>
         )}
       </DialogContent>
