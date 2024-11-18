@@ -19,55 +19,52 @@ import {
   AvatarFallback,
 } from "@/components/ui";
 import { IconWithText } from "@/components/atoms";
-import { ImageCardProps, ImageCardType } from "@/types/home";
+import { ImageCardProps } from "@/types/home";
 import { toast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
+import { getBookmarks, setBookmarks } from "@/util/helper";
 
 const ImageDialog = ({ data, mode }: ImageCardProps) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
-  // 북마크 확인 함수
-  const checkIfBookmarked = (): boolean => {
-    const existingBookmarks: ImageCardType[] = JSON.parse(
-      localStorage.getItem("bookmarks") || "[]"
-    );
-    return existingBookmarks.some((bookmark) => bookmark.id === data.id);
-  };
-
   // 북마크 여부 확인
   useEffect(() => {
-    setIsBookmarked(checkIfBookmarked());
+    const existingBookmarks = getBookmarks();
+    setIsBookmarked(
+      existingBookmarks.some((bookmark) => bookmark.id === data.id)
+    );
   }, [data.id]);
 
+  // 북마크 추가 함수
   const addBookmark = () => {
-    if (!isBookmarked) {
-      const existingBookmarks: ImageCardType[] = JSON.parse(
-        localStorage.getItem("bookmarks") || "[]"
-      );
-      const updatedBookmarks = [...existingBookmarks, data];
-      localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
-      setIsBookmarked(true);
-      toast({
-        title: "저장 성공",
-        description: "북마크에 추가했습니다.",
-      });
-    } else {
+    const existingBookmarks = getBookmarks();
+
+    if (existingBookmarks.some((bookmark) => bookmark.id === data.id)) {
       toast({
         variant: "destructive",
         title: "저장 실패",
         description: "이미 북마크에 추가된 항목입니다.",
       });
+      return;
     }
+
+    const updatedBookmarks = [...existingBookmarks, data];
+    setBookmarks(updatedBookmarks);
+    setIsBookmarked(true);
+    toast({
+      title: "저장 성공",
+      description: "북마크에 추가했습니다.",
+    });
   };
 
+  // 북마크 삭제 함수
   const removeBookmark = () => {
-    const existingBookmarks: ImageCardType[] = JSON.parse(
-      localStorage.getItem("bookmarks") || "[]"
-    );
+    const existingBookmarks = getBookmarks();
     const updatedBookmarks = existingBookmarks.filter(
       (bookmark) => bookmark.id !== data.id
     );
-    localStorage.setItem("bookmarks", JSON.stringify(updatedBookmarks));
+
+    setBookmarks(updatedBookmarks);
     setIsBookmarked(false);
     toast({
       title: "삭제 성공",
@@ -141,7 +138,7 @@ const ImageDialog = ({ data, mode }: ImageCardProps) => {
             </div>
           </div>
         </div>
-        {/* 북마크 추가 버튼 */}
+        {/* 북마크 추가/삭제 버튼 */}
         {mode === "home" ? (
           <Button
             variant={"secondary"}

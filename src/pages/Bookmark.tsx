@@ -10,7 +10,7 @@ const BookmarkPage = () => {
   return (
     <div className="page">
       <div className="page__container">
-        <Header />
+        <Header mode="bookmark" />
         <div className="page__container__contents">
           {bookmarks.length > 0 ? (
             bookmarks.map((img: ImageCardType) => (

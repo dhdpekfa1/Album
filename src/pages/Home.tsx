@@ -44,7 +44,7 @@ const HomePage = () => {
   return (
     <div className="page">
       <div className="page__container">
-        <Header />
+        <Header mode="home" />
         <Nav />
         {/* 상단 배너 */}
         <div className="page__container__wallpaper">
