@@ -9,7 +9,7 @@ import { useAtom } from "jotai";
 
 const HomePage = () => {
   const { toast } = useToast();
-  const [page] = useAtom(pageAtom);
+  const [page, setPage] = useAtom(pageAtom);
   const [searchValue, setSearchValue] = useAtom(searchValueAtom);
   const [images, setImages] = useState([]);
 
@@ -83,7 +83,11 @@ const HomePage = () => {
         </div>
       </div>
 
-      <PaginationFooter />
+      <PaginationFooter
+        totalPages={344}
+        currentPage={page}
+        handlePage={setPage}
+      />
     </div>
   );
 };

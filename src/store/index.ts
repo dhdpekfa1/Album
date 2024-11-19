@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const searchValueAtom = atom<string>("korea");
 export const pageAtom = atom<number>(1);
+export const totalPageAtom = atom<number>(344);
 
 // API 호출 함수
 export const getDataApi = async (searchValue: string, page: number) => {
